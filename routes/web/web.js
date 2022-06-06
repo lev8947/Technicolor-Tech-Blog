@@ -13,6 +13,24 @@ router.get('/', (req, res) => {
 
 });
 
+router.post('/posts', async (req, res) => {
+
+   await Post.create({
+        title: req.body.title,
+        content: req.body.content,
+        user_id: req.session.user_id
+    });
+
+    res.redirect('/dashboard');
+})
+
+router.get('/posts/new', (req, res) => {
+    res.render('newpost', {
+        logged_in: req.session.logged_in,
+    });
+})
+
+
 
 router.get('/posts/:id', async (req, res) => {
 
@@ -24,6 +42,10 @@ router.get('/posts/:id', async (req, res) => {
             },
             {
                 model: Comment,
+                //comments load in chronoligical order
+                order: [
+                    Comment, 'createdAt', 'ASC'
+                ],
                 include: [
                     {
                         model: User
@@ -32,6 +54,7 @@ router.get('/posts/:id', async (req, res) => {
             }
         ]
     });
+
 
     res.render("post", {
         logged_in: req.session.logged_in,
