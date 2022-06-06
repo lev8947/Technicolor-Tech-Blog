@@ -1,12 +1,11 @@
 
 
-<div>
+{{!-- individual post page --}}
 
-    {{#each posts as |post|}}
 
         <article>
             
-            <a href="/posts/{{post.id}}"><h1>{{post.title}}</h1> </a>
+            <h1>{{post.title}}</h1>
             <h4>Created at: {{ format_date post.createdAt}}</h4>
             <h4>By: {{ post.user.email }}</h4>
 
@@ -15,7 +14,8 @@
 
         </article>
 
-    {{/each}}
+        <section>
 
+            {{!-- comments --}}
 
-</div>
+        </section>
