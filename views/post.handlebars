@@ -14,8 +14,19 @@
 
         </article>
 
+        <h1>Comments</h1>
         <section>
 
             {{!-- comments --}}
 
-        </section>
+        {{#each post.comments as |comment|}}
+            <article>
+                
+
+                <h4>Created at: {{ format_date comment.createdAt}}</h4>
+                <h4>By: {{ comment.user.email }}</h4>
+                <p>{{comment.body}}</p>
+                
+
+            </article>
+        {{/each}}
